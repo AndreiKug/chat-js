@@ -1,0 +1,23 @@
+{
+  "name": "chat-js",
+  "version": "1.0.0",
+  "description": "Practice JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "static ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RestoreAvailable/chat-js.git"
+  },
+  "author": "Andrey K",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RestoreAvailable/chat-js/issues"
+  },
+  "homepage": "https://github.com/RestoreAvailable/chat-js#readme",
+  "devDependencies": {
+    "node-static": "^0.7.10"
+  }
+}
