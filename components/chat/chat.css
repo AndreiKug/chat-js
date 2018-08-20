@@ -1,0 +1,19 @@
+.chat {
+    padding: 5px;
+    border: 1px solid #cecece;
+    overflow: hidden;
+}
+
+.chat__message {
+    padding: 10px;
+    background-color: olive;
+}
+
+.chat__author {
+    color: white;
+}
+
+
+.chat__message--my {
+    background-color: #759cb8;
+}
