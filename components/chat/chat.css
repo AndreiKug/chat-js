@@ -6,14 +6,16 @@
 
 .chat__message {
     padding: 10px;
-    background-color: olive;
+    background-color: cornflowerblue;
 }
 
 .chat__author {
     color: white;
 }
 
-
 .chat__message--my {
     background-color: #759cb8;
 }
+
+
+
