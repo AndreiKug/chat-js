@@ -7,13 +7,16 @@
 .chat__message {
     padding: 10px;
     background-color: cornflowerblue;
+    overflow: hidden;
 }
 
 .chat__author {
+    /*float: left;*/
     color: white;
 }
 
 .chat__message--my {
+    /*float: right;*/
     background-color: #759cb8;
 }
 
