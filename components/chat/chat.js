@@ -24,12 +24,18 @@
 
             this.el.innerHTML = `
                 <div class="chat">
+                    ${messagesHTML}                        
+                </div>
+            `;
+
+            /* this.el.innerHTML = `
+                <div class="chat">
                     <div class="chat__message chat__message_my">
                         <span class="chat__author">Tim</span>
                         Всем привет!
-                    </div>                                       
+                    </div>
                 </div>
-            `;
+            `;*/
         }
 
         /**
