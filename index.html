@@ -26,6 +26,7 @@
 
 
 	<script>
+        // можно создать супер-компоненту new App (); которая знает про другие компоненты, чтобы не вызывать все это в index.html
 		let form = new Form({
 			el: document.querySelector('.js-form')
 		});
@@ -38,6 +39,11 @@
 		form.render();
 		chat.render();
 
+		form.onSubmit = (message) => {
+		    chat.addMessage(message);
+            chat.render(); // отобразить данные, сохраненные в компоненте
+            form.render();
+        };
 
 	</script>
 </body>
