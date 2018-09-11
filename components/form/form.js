@@ -1,57 +1,65 @@
-(function(){
-    'use strict';
+(function () {
+	'use strict';
 
+	class Form {
+		constructor(options) {
+			this.el = options.el;
 
+			this._initEvents();
+		}
 
-    class Form {
-        constructor({el}) {
-            this.el = el;
+		render () {
+			this.el.innerHTML = `
+				<form>
+					<textarea name="message" type="text"></textarea>
+					<input type="submit" value="Отправить" />
+				</form>
+			`;
 
-            this._onSubmit = this._onSubmit.bind(this);
-            this._initEvents();
-        }
+			this.formEl = this.el.querySelector('form');
+		}
 
-        onSubmit (message) { // вызывать будем в обработчике события, передавая данные формы
-            console.warn('You should define your own onSubmit');
-            console.info('message:', message);
-        }
+		/**
+		 * Установка callback отправки формы
+		 * @param  {Function} cb
+		 */
+		onSubmit (cb) {
+			this._submitCallback = cb;
+		}
 
-        _initEvents () {
-            this.el.addEventListener('submit', this._onSubmit);
-        }
+		reset () {
+			this.formEl.reset();
+		}
+	
+		_initEvents () {
+			this.el.addEventListener('submit', this._onSubmit.bind(this));
+		}
 
-        _onSubmit (event) {
-            event.preventDefault();
+		_onSubmit (event) {
+			event.preventDefault();
+			let formData = this._getFormData();
 
-            let formData = this._getFormData();
-            this.onSubmit(formData);
-        }
+			this._submitCallback(formData);
+		}
 
-        _getFormData () {
-            let names = this.el.querySelectorAll('[name]');
-            let data = {};
+		_getInputs () {
+			return this.el.querySelectorAll('input, textarea');
+		}
 
-            names.forEach(el => {
-                data[el.name] = el.value;
-            });
+		_getFormData () {
+			let formData = {};
 
-            return data;
-        }
+			[...this._getInputs()].forEach(input => {
+				formData[input.name] = {
+					value: input.value
+				};
+			});
 
+			return formData;
+		}
 
+	}
 
-        render () {
-            this.el.innerHTML = `
-                <input name="username" required placeholder="Имя пользователя">
-                <form class="form">                    
-                    <textarea name="message" required placeholder="Сообщение..." rows="4"></textarea>
-                    <br>
-                    <input type="submit">
-                </form>   
-            `;
-        }
-    }
-
-    //export из замыкания
-    window.Form = Form;
+	//export
+	window.Form = Form;
 })();

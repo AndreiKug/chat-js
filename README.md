@@ -1,2 +1,2 @@
 # chat-js
-Practice JS
+Учебный проект. Чат.

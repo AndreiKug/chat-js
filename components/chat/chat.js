@@ -1,53 +1,48 @@
-(function(){
-    'use strict';
+(function () {
+	'use strict';
 
-    /**
-     * @typedef {Object} ChatMessage
-     * @property {string} username
-     * @property {string} message
-     */
+	//import
+	const tmpl = window.chatTmpl;
 
-    class Chat {
-        constructor({el, data = {messages: []}}) {
-            this.el = el;
-            this.data = data; // массив сообщений
-        }
+	/**
+	 * @typedef {Object} ChatMessage
+	 *
+ 	 * @property {string} text - Текст сообщения
+ 	 * @property {string} email - Email отправителя сообщения
+	 */
 
-        render () {
+	class Chat {
+		constructor({el, data = {messages: []}}) {
+			this.el = el;
+			this.data = data;
 
-            let messagesHTML = this.data.messages.map(mData => {
-               return `<div class="chat__message">
-                        <span class="chat__author">${mData.username}</span>
-                        ${mData.message}
-                    </div>`;
-            }).join('<br>');
+			this._getUserName();
+		}
 
-            this.el.innerHTML = `
-                <div class="chat">
-                    ${messagesHTML}                        
-                </div>
-            `;
+		render () {
+			this.el.innerHTML = tmpl(this.data);
+		}
 
-            /* this.el.innerHTML = `
-                <div class="chat">
-                    <div class="chat__message chat__message_my">
-                        <span class="chat__author">Tim</span>
-                        Всем привет!
-                    </div>
-                </div>
-            `;*/
-        }
+		/**
+		 * Добавить новое сообщение в чат
+		 * @param {ChatMessage} data
+		 */
+		addMessage (data) {
+			this.data.messages.push({
+				avatar: 'http://i.imgur.com/FHMnsVNt.jpg',
+				name: data.name || this.data.user,
+				text: data.text,
+				date: data.date || new Date()
+			});
+		}
 
-        /**
-         * Add message into chat store. Without rerender
-         * @param {ChatMessage} данные сообщения
-         */
+		_getUserName () {
+			//TODO: справшивать
+			this.data.user = 'Tim';
+		}
+	}
 
-        addMessage (message) { // Кто-то должен вызвать этот метод и добавить сообщение в массив this.data в конструктор
-            this.data.messages.push(message);
-        }
-    }
 
-    //export из замыкания
-    window.Chat = Chat;
+	//export
+	window.Chat = Chat;
 })();
